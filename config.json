@@ -1,0 +1,6 @@
+{
+	"plugin_name": "Saber Commerce Licensing",
+	"plugin_name_short": "SACOM Licensing",
+	"text_domain": "saber-commerce-licensing",
+	"namespace": "SaberCommerce\Extension\Licensing"
+}
