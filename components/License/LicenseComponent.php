@@ -1,6 +1,6 @@
 <?php
 
-namespace SaberCommerce\Component\License;
+namespace SaberCommerce\Extension\Licensing\Component\License;
 
 use \SaberCommerce\Template;
 
@@ -8,34 +8,13 @@ class LicenseComponent extends \SaberCommerce\Component {
 
 	public function init() {
 
-		$this->addShortcodes();
+		$this->shortcodes();
 
 		add_action('wp_enqueue_scripts', [$this, 'addScripts']);
 
 	}
 
-	public function addShortcodes() {
-
-		add_shortcode('saber_commerce_license_register', function() {
-
-			$template = new Template();
-			$template->path = 'components/License/templates/';
-			$template->name = 'register_form';
-			return $template->get();
-
-		});
-
-		add_shortcode('saber_commerce_license_login', function() {
-
-			$template = new Template();
-			$template->path = 'components/License/templates/';
-			$template->name = 'login_form';
-			return $template->get();
-
-		});
-
-
-	}
+	public function shortcodes() {}
 
 	public function addScripts() {
 
@@ -46,6 +25,30 @@ class LicenseComponent extends \SaberCommerce\Component {
 			'1.0.0',
 			true
 		);
+
+	}
+
+	public function showInMenu() {
+
+		return true;
+
+	}
+
+	public function wpMenuLabel() {
+
+		return 'Licenses';
+
+	}
+
+	public function wpAdminSlug() {
+
+		return 'sacom-license';
+
+	}
+
+	public function adminCallback() {
+
+		print '<sacom-license-editor />';
 
 	}
 
@@ -65,18 +68,6 @@ class LicenseComponent extends \SaberCommerce\Component {
 		) $charsetCollate;";
 		dbDelta( $sql );
 
-		/* Install license user table */
-		$tableName = $wpdb->prefix . 'sacom_license_user';
-		$sql = "CREATE TABLE $tableName (
-			id_license_user mediumint(9) NOT NULL AUTO_INCREMENT,
-			id_license mediumint(9) NOT NULL,
-			wp_user_id mediumint(9) NOT NULL,
-			PRIMARY KEY (id_license_user)
-		) $charsetCollate;";
-		dbDelta( $sql );
-
 	}
-
-
 
 }

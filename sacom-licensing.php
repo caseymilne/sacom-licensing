@@ -24,7 +24,25 @@ define( 'SABER_COMMERCE_LICENSING_DEV_MODE', false );
 
 class Plugin {
 
+	public function __construct() {
 
+		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseComponent.php' );
+
+		add_filter( 'sacom_component_list', function( $components ) {
+
+			$componentDefinition = [
+				'type'  => 'extension',
+				'name'  => 'License',
+				'class' => '\SaberCommerce\Extension\Licensing\Component\License\LicenseComponent'
+			];
+
+			$components[] = $componentDefinition;
+
+			return $components;
+
+		});
+
+	}
 
 
 
