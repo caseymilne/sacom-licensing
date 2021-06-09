@@ -113,7 +113,7 @@ class LicenseEditor {
 		/* Timesheet Editor styles */
 		wp_enqueue_style(
 			'sacom-license-editor-styles',
-			SABER_COMMERCE_URL . '/components/License/css/license-editor.css',
+			SABER_COMMERCE_LICENSING_URL . '/components/License/css/license-editor.css',
 			[],
 			\SaberCommerce\Plugin::getEnqueueVersion(),
 			'all'
@@ -121,7 +121,7 @@ class LicenseEditor {
 
 		wp_enqueue_script(
 			'sacom-license-editor',
-			SABER_COMMERCE_URL . 'components/License/js/LicenseEditor.js',
+			SABER_COMMERCE_LICENSING_URL . 'components/License/js/LicenseEditor.js',
 			[ 'sacom-editor-base', 'sacom-admin-script', 'wp-util', 'jquery-ui-tooltip', 'jquery-ui-dialog', 'jquery-ui-datepicker', 'sacom-dayjs' ],
 			\SaberCommerce\Plugin::getEnqueueVersion(),
 			1
