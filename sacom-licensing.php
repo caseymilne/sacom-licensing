@@ -27,13 +27,14 @@ class Plugin {
 	public function __construct() {
 
 		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseComponent.php' );
+		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseEditor.php' );
 
 		add_filter( 'sacom_component_list', function( $components ) {
 
 			$componentDefinition = [
 				'type'  => 'extension',
 				'name'  => 'License',
-				'class' => '\SaberCommerce\Extension\Licensing\Component\License\LicenseComponent'
+				'class' => '\SaberCommerce\Extension\Licensing\LicenseComponent'
 			];
 
 			$components[] = $componentDefinition;

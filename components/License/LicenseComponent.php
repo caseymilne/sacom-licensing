@@ -1,6 +1,6 @@
 <?php
 
-namespace SaberCommerce\Extension\Licensing\Component\License;
+namespace SaberCommerce\Extension\Licensing;
 
 use \SaberCommerce\Template;
 
@@ -10,23 +10,21 @@ class LicenseComponent extends \SaberCommerce\Component {
 
 		$this->shortcodes();
 
-		add_action('wp_enqueue_scripts', [$this, 'addScripts']);
+		/* Load editor. */
+		add_action( 'admin_enqueue_scripts', function( $adminPage ) {
+
+			if( 'saber-commerce_page_sacom-license' === $adminPage ) {
+
+				$editor = new LicenseEditor();
+				$editor->enqueueEditorScript();
+
+			}
+
+		});
 
 	}
 
 	public function shortcodes() {}
-
-	public function addScripts() {
-
-		wp_enqueue_script(
-			'sacom-login-form-script',
-			SABER_COMMERCE_URL . '/components/License/js/login-form.js',
-			['jquery', 'wp-util'],
-			'1.0.0',
-			true
-		);
-
-	}
 
 	public function showInMenu() {
 
@@ -62,8 +60,6 @@ class LicenseComponent extends \SaberCommerce\Component {
 		$tableName = $wpdb->prefix . 'sacom_license';
 		$sql = "CREATE TABLE $tableName (
 			id_license mediumint(9) NOT NULL AUTO_INCREMENT,
-			wp_user_id mediumint(9) NOT NULL,
-			title tinytext NOT NULL,
 			PRIMARY KEY (id_license)
 		) $charsetCollate;";
 		dbDelta( $sql );
