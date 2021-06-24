@@ -60,15 +60,15 @@ class SACOM_LicenseEditor {
 
 		if( objectId ) {
 
-			let account = SACOM_EditorInstance.getLoadedObjectModel( objectId );
+			let license = SACOM_EditorInstance.getLoadedObjectModel( objectId );
 
-			SACOM_EditorInstance.setCurrentParentObjectModel( account );
+			SACOM_EditorInstance.setCurrentParentObjectModel( license );
 			SACOM_EditorInstance.initEditMode();
 
-			jQuery( '#stat-account-users-count h2' ).html( account.users.length );
+			jQuery( '#stat-license-users-count h2' ).html( license.users.length );
 
-			// Update Account ID.
-			jQuery( '#stat-account-id h2' ).html( account.accountId );
+			// Update License ID.
+			jQuery( '#stat-license-id h2' ).html( license.licenseId );
 
 		} else {
 
@@ -77,7 +77,7 @@ class SACOM_LicenseEditor {
 		}
 
 		// Add save handler after UX rendered because it contains change events that may fire when setting up fields.
-		// SACOM_EditorInstance.parentSaveHandler();
+		SACOM_EditorInstance.parentSaveHandler();
 
 		// Do script or jQuery plugin init.
 		// SACOM_EditorInstance.formScriptReinit()
@@ -295,6 +295,9 @@ class SACOM_LicenseEditor {
 
 		jQuery( document ).on( 'change.save', '#field_title', function() {
 
+			console.log( 'change.save... ' );
+
+
 			SACOM_EditorInstance.parseParentForm();
 			SACOM_EditorInstance.parentSaveRequest();
 
@@ -424,6 +427,62 @@ class SACOM_LicenseEditor {
 			jQuery( document ).trigger({
 				type: 'sacom_editor_object_list_loaded'
 			});
+
+		});
+
+	}
+
+	parseParentForm() {
+
+		if( SACOM_EditorInstance.data.currentObjects.parent.model === false ) {
+			SACOM_EditorInstance.data.currentObjects.parent.model = {}
+		}
+
+		SACOM_EditorInstance.data.currentObjects.parent.model.title = jQuery( '#field_title' ).val();
+
+	}
+
+	parentSaveRequest() {
+
+		let data = {
+			model: SACOM_EditorInstance.data.currentObjects.parent.model
+		}
+		wp.ajax.post( 'sacom_license_save', data ).done( function( response ) {
+
+
+			jQuery( document ).trigger({
+
+				type: 'sacom_license_saved',
+				response: response
+
+			});
+
+			/* Show response message. */
+			if( response.code === 200 ) {
+
+				if( SACOM_EditorInstance.data.mode === 'create' ) {
+
+					SACOM_EditorInstance.data.mode = 'edit';
+					//TimesheetEditor.messages.showMessage( 'Timesheet created. Your timesheet was created successfully with ID ' + response.timesheet.timesheetId + '.' );
+
+				} else {
+
+					//TimesheetEditor.messages.showMessage( 'Timesheet saved. Your timesheet was updated successfully.' );
+
+				}
+
+			} else {
+
+				// Show error message (not saved)
+
+			}
+
+			/* Update SACOM_EditorInstance parent data model. */
+			SACOM_EditorInstance.data.currentObjects.parent.model = response.model;
+
+			// Update the License ID in case it's not already set.
+			jQuery( '#stat-license-id h2' ).html( SACOM_EditorInstance.data.currentObjects.parent.model.licenseId );
+
 
 		});
 

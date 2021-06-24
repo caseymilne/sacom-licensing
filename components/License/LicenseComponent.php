@@ -25,6 +25,9 @@ class LicenseComponent extends \SaberCommerce\Component {
 		$e = new LicenseEditor;
 		$e->init();
 
+		$api = new LicenseApi();
+		$api->init();
+
 	}
 
 	public function shortcodes() {}
