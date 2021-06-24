@@ -43,10 +43,32 @@ class Plugin {
 
 		});
 
+		// Initialize component.
+		$c = new LicenseComponent();
+		$c->init();
+
 	}
 
+	public static function activation() {
 
+		$c = new LicenseComponent();
+		$c->activation();
+
+	}
+
+	public static function deactivation() {
+
+		$c = new LicenseComponent();
+		$c->deactivation();
+
+	}
 
 }
 
 new Plugin();
+
+/*
+ * Activation and deactivation hooks
+ */
+register_activation_hook(__FILE__, '\SaberCommerce\Extension\Licensing\Plugin::activation');
+register_deactivation_hook(__FILE__, '\SaberCommerce\Extension\Licensing\Plugin::deactivation');
