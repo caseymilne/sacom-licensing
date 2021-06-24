@@ -26,6 +26,7 @@ class SACOM_LicenseEditor {
 		// Build header.
 		this.editor = new Editor();
 		this.editor.renderPageHeader();
+		this.editor.toggleField.events();
 
 		// Init all events.
 		this.eventsInit();
@@ -227,17 +228,17 @@ class SACOM_LicenseEditor {
 
 		this.fields.forEach( function( field, index ) {
 
-			var fieldKey = 'field_' + field.id;
+			if( field.type === 'toggle' ) {
 
-			const formRowEl = document.createElement('div');
-			formRowEl.className = 'sacom-form-field';
+				var fieldEl = SACOM_EditorInstance.makeToggleField( field );
 
-			var h = '';
-			h += '<label for="' + fieldKey + '">' + field.label + '</label>';
-			h += '<input id="' + fieldKey + '" placeholder="' + field.placeholder + '" />';
-			formRowEl.innerHTML = h;
+			} else {
 
-			el.appendChild( formRowEl );
+				var fieldEl = SACOM_EditorInstance.makeTextField( field );
+
+			}
+
+			el.appendChild( fieldEl );
 
 		});
 
@@ -255,6 +256,56 @@ class SACOM_LicenseEditor {
 		console.log( el )
 
 		parentEl.appendChild( el );
+
+	}
+
+	makeTextField( field ) {
+
+		var fieldKey = 'field_' + field.id;
+
+		const el = document.createElement('div');
+		el.className = 'sacom-form-field';
+
+		var h = '';
+		h += '<label for="' + fieldKey + '">' + field.label + '</label>';
+		h += '<input id="' + fieldKey + '" placeholder="' + field.placeholder + '" />';
+		el.innerHTML = h;
+
+		return el;
+
+	}
+
+	makeToggleField( field ) {
+
+		const el = document.createElement( 'div' );
+
+		// Add label.
+		const labelEl = document.createElement( 'label' );
+		labelEl.innerHTML = field.label;
+		el.appendChild( labelEl );
+
+		// Make field.
+		const toggleEl = this.makeToggleFieldInput( field );
+		el.appendChild( toggleEl );
+
+		return el;
+
+	}
+
+	makeToggleFieldInput( field ) {
+
+		const toggle = this.editor.toggleField;
+
+		var options = {
+			id: field.id,
+			label: field.label,
+			value: field.value,
+			default: field.default,
+			choices: field.choices
+		}
+
+		const toggleField = toggle.render( options );
+		return toggleField;
 
 	}
 

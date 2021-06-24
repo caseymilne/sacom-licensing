@@ -163,10 +163,21 @@ class LicenseEditor {
 		$fs[] = $f;
 
 		$f              = new Field();
-		$f->type        = 'select';
+		$f->type        = 'toggle';
 		$f->id          = 'duration';
 		$f->label       = __( 'Duration', 'saber-commerce' );
 		$f->placeholder = __( 'Choose duration.', 'saber-commerce' );
+		$f->default     = 'year';
+		$f->choices = [
+			[
+				'value' => 'year',
+				'label' => __( 'YEAR', 'saber-commerce' )
+			],
+			[
+				'value' => 'lifetime',
+				'label' => __( 'LIFETIME', 'saber-commerce' )
+			]
+		];
 		$fs[] = $f;
 
 		$f              = new Field();
