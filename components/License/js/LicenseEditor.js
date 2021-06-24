@@ -60,15 +60,13 @@ class SACOM_LicenseEditor {
 
 		if( objectId ) {
 
+			console.log( objectId )
+			console.log( this.data )
+
 			let license = SACOM_EditorInstance.getLoadedObjectModel( objectId );
 
 			SACOM_EditorInstance.setCurrentParentObjectModel( license );
 			SACOM_EditorInstance.initEditMode();
-
-			jQuery( '#stat-license-users-count h2' ).html( license.users.length );
-
-			// Update License ID.
-			jQuery( '#stat-license-id h2' ).html( license.licenseId );
 
 		} else {
 
@@ -438,7 +436,10 @@ class SACOM_LicenseEditor {
 			SACOM_EditorInstance.data.currentObjects.parent.model = {}
 		}
 
-		SACOM_EditorInstance.data.currentObjects.parent.model.title = jQuery( '#field_title' ).val();
+		SACOM_EditorInstance.data.currentObjects.parent.model.title       = jQuery( '#field_title' ).val();
+		SACOM_EditorInstance.data.currentObjects.parent.model.description = jQuery( '#field_description' ).val();
+		SACOM_EditorInstance.data.currentObjects.parent.model.products    = jQuery( '#field_products' ).val();
+		SACOM_EditorInstance.data.currentObjects.parent.model.duration    = jQuery( '#field_duration' ).val();
 
 	}
 
@@ -448,7 +449,6 @@ class SACOM_LicenseEditor {
 			model: SACOM_EditorInstance.data.currentObjects.parent.model
 		}
 		wp.ajax.post( 'sacom_license_save', data ).done( function( response ) {
-
 
 			jQuery( document ).trigger({
 
@@ -485,6 +485,53 @@ class SACOM_LicenseEditor {
 
 
 		});
+
+	}
+
+	getLoadedObjectModel( objectId ) {
+
+		var objectMatch = false;
+
+		jQuery.each( SACOM_EditorInstance.objectList, function( index, object ) {
+
+			if( object.licenseId == objectId ) {
+				objectMatch = object;
+				return true;
+			}
+
+		});
+
+		return objectMatch;
+
+	}
+
+	setCurrentParentObjectModel( object ) {
+
+		this.data.currentObjects.parent.model = object;
+
+	}
+
+	getCurrentParentObjectModel() {
+
+		return this.data.currentObjects.parent.model;
+
+	}
+
+	initEditMode() {
+
+		let model = SACOM_EditorInstance.getCurrentParentObjectModel();
+
+		console.log( model )
+
+		if( model.title ) {
+
+			jQuery( '#field_title' ).val( model.title );
+
+		}
+
+		// Update License ID.
+		jQuery( '#stat-license-id h2' ).html( model.licenseId );
+
 
 	}
 

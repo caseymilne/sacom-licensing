@@ -7,6 +7,11 @@ use \SaberCommerce\Template;
 class LicenseModel extends \SaberCommerce\Model {
 
 	public $licenseId;
+	public $title;
+	public $description;
+	public $products;
+	public $duration;
+	public $status;
 	public $table = 'license';
 
 	public function fetch() {
@@ -140,8 +145,11 @@ class LicenseModel extends \SaberCommerce\Model {
 	public function load( $row ) {
 
 		$license = new LicenseModel();
-		$license->licenseId = $row->id_license;
-		$license->status  = $row->status;
+		$license->licenseId   = $row->id_license;
+		$license->title       = $row->title;
+		$license->description = $row->description;
+		$license->products    = $row->products;
+		$license->status      = $row->status;
 		return $license;
 
 	}
@@ -152,8 +160,22 @@ class LicenseModel extends \SaberCommerce\Model {
 		$tableName = $wpdb->prefix . 'sacom_' . $this->table;
 
 		$data = [
-			'id_cart' => $this->cart->cartId
+			'title'        => $this->title,
+			'description'  => $this->description,
+			'products'     => $this->products,
 		];
+
+		if( $this->duration ) {
+
+			$data['duration'] = $this->duration;
+
+		}
+
+		if( $this->status ) {
+
+			$data['status'] = $this->status;
+
+		}
 
 		if( !$this->licenseId ) {
 
