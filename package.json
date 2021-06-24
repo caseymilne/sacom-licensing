@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/eatbuildplay/sacom-licensing/issues"
   },
-  "homepage": "https://github.com/eatbuildplay/sacom-licensing#readme"
+  "homepage": "https://github.com/eatbuildplay/sacom-licensing#readme",
+  "devDependencies": {
+    "@wordpress/scripts": "^16.1.3"
+  }
 }

@@ -126,7 +126,8 @@ class LicenseEditor {
 
 		$localizedData = [
 			'saberCommerceUrl' => SABER_COMMERCE_URL,
-			'fields'           => $this->fields()
+			'fields'           => $this->fields(),
+			'strings'          => $this->strings()
 		];
 
 		wp_localize_script(
@@ -176,6 +177,17 @@ class LicenseEditor {
 		$fs[] = $f;
 
 		return $fs;
+
+	}
+
+	function strings() {
+
+		return [
+			'add_new'             => __( 'Add New', 'saber-commerce' ),
+			'view_all'            => __( 'View All', 'saber-commerce' ),
+			'dashboard_uppercase' => __( 'DASHBOARD', 'saber-commerce' ),
+			'licenses_uppercase'  => __( 'LICENSES', 'saber-commerce' ),
+		];
 
 	}
 

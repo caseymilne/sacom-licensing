@@ -24,13 +24,8 @@ class SACOM_LicenseEditor {
 		this.fields = editorData.fields;
 
 		// Build header.
-		this.renderPageHeader();
-
-		// Build subheader.
-		let subheader = this.subheader();
-		let breadcrumbs = this.breadcrumbs();
-		subheader.appendChild( breadcrumbs );
-		this.rootElement().appendChild( subheader );
+		this.editor = new Editor();
+		this.editor.renderPageHeader();
 
 		// Init all events.
 		this.eventsInit();
@@ -54,7 +49,7 @@ class SACOM_LicenseEditor {
 	modeSwitchEdit( objectId ) {
 
 		SACOM_EditorInstance.clearUx();
-		SACOM_EditorInstance.renderPageHeader();
+		this.editor.renderPageHeader();
 		SACOM_EditorInstance.editorGrid();
 		SACOM_EditorInstance.overlayCloseButton();
 		SACOM_EditorInstance.renderEditForm();
@@ -215,20 +210,6 @@ class SACOM_LicenseEditor {
 
 	}
 
-	renderPageHeader() {
-
-		let pageHeader = this.pageHeader();
-		let logo = this.logo();
-		let createButton = this.createButton();
-		let returnButton = this.returnButton();
-		pageHeader.appendChild( logo );
-		pageHeader.appendChild( createButton );
-		pageHeader.appendChild( returnButton );
-		this.rootElement().appendChild( pageHeader );
-
-
-	}
-
 	overlayCloseButton() {
 
 		const el = document.createElement('div');
@@ -306,7 +287,7 @@ class SACOM_LicenseEditor {
 		jQuery( document ).on( 'click', '#sacom-editor-overlay-close, #sacom-button-return button', function() {
 
 			SACOM_EditorInstance.clearUx();
-			SACOM_EditorInstance.renderPageHeader();
+			SACOM_EditorInstance.editor.renderPageHeader();
 			SACOM_EditorInstance.renderListFilters();
 			SACOM_EditorInstance.renderObjectListContainer();
 			SACOM_EditorInstance.loadList();
