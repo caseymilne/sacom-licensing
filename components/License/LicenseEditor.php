@@ -85,27 +85,6 @@ class LicenseEditor {
 
 		});
 
-
-		add_action( 'wp_ajax_sacom_license_user_delete', function() {
-
-			$response = new \stdClass();
-
-			$licenseUserId = sanitize_text_field( $_POST['licenseUserId'] );
-
-			$model = new LicenseUserModel();
-			$obj   = $model->fetchOne( $licenseUserId );
-			$licenseId = $obj->licenseId;
-			$response->result = $obj->delete();
-			$response->licenseUserId = $licenseUserId;
-			$model = new LicenseModel();
-			$response->parentModel = $model->fetchOne( $licenseId );
-
-			$response->code = 200;
-			wp_send_json_success( $response );
-
-		});
-
-
 	}
 
 	public function enqueueEditorScript() {
