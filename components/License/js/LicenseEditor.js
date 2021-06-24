@@ -4,15 +4,25 @@ class SACOM_LicenseEditor {
 
 		console.log('Init LicenseEditor...')
 
+		this.data = {
+			currentObjects: {
+				parent: {
+					model: false,
+					element: false
+				},
+				child:  {
+					model: false,
+					element: false
+				}
+			}
+		}
+
+		// Localize fields.
+		console.log( editorData )
+		this.fields = editorData.fields;
+
 		// Build header.
-		let pageHeader = this.pageHeader();
-		let logo = this.logo();
-		let createButton = this.createButton();
-		let returnButton = this.returnButton();
-		pageHeader.appendChild( logo );
-		pageHeader.appendChild( createButton );
-		pageHeader.appendChild( returnButton );
-		this.rootElement().appendChild( pageHeader );
+		this.renderPageHeader();
 
 		// Build subheader.
 		let subheader = this.subheader();
@@ -22,6 +32,8 @@ class SACOM_LicenseEditor {
 
 		// Init all events.
 		this.eventsInit();
+
+
 
 	}
 
@@ -33,16 +45,18 @@ class SACOM_LicenseEditor {
 
 		});
 
+		this.returnToListEvents();
+
 	}
 
 	modeSwitchEdit( objectId ) {
 
 		SACOM_EditorInstance.clearUx();
 		SACOM_EditorInstance.renderPageHeader();
-		SACOM_EditorInstance.renderEditorGrid();
-		SACOM_EditorInstance.renderOverlayCloseButton();
+		SACOM_EditorInstance.editorGrid();
+		SACOM_EditorInstance.overlayCloseButton();
 		SACOM_EditorInstance.renderEditForm();
-		SACOM_EditorInstance.childObjectListRender();
+		// SACOM_EditorInstance.childObjectListRender();
 
 		if( objectId ) {
 
@@ -63,13 +77,50 @@ class SACOM_LicenseEditor {
 		}
 
 		// Add save handler after UX rendered because it contains change events that may fire when setting up fields.
-		SACOM_EditorInstance.parentSaveHandler();
-
-		/* Populate list of WP Users. */
-		SACOM_EditorInstance.wpUserOptionLoader();
+		// SACOM_EditorInstance.parentSaveHandler();
 
 		// Do script or jQuery plugin init.
-		SACOM_EditorInstance.formScriptReinit()
+		// SACOM_EditorInstance.formScriptReinit()
+
+	}
+
+	editorGrid( cols ) {
+
+		const el = document.createElement('div');
+		el.id = 'sacom-editor-grid';
+
+		const el2 = document.createElement('div');
+		el2.id = 'editor-grid-header';
+
+		const el3 = document.createElement('div');
+		el3.id = 'editor-message-container';
+
+		el.appendChild( el2 );
+		el.appendChild( el3 );
+
+		/* Editor grid body. */
+		const el4 = document.createElement('div');
+		el4.id = 'editor-grid-body';
+
+		if( cols == 1 ) {
+
+			el4.className = 'sacom-editor-grid-single-col';
+
+		}
+
+		el.appendChild( el4 );
+
+		const el5 = document.createElement('div');
+		el5.id = 'sacom-editor-column-main';
+		el5.className = 'sacom-editor-column-main';
+		el.appendChild( el5 );
+
+		const el6 = document.createElement('div');
+		el6.id = 'sacom-editor-column-right';
+		el6.className = 'sacom-editor-column-right';
+		el.appendChild( el6 );
+
+		this.rootElement().appendChild( el );
 
 	}
 
@@ -82,6 +133,12 @@ class SACOM_LicenseEditor {
 	rootElementName() {
 
 		return 'sacom-license-editor';
+
+	}
+
+	clearUx() {
+
+		this.rootElement().innerHTML = '';
 
 	}
 
@@ -159,6 +216,216 @@ class SACOM_LicenseEditor {
 	pageTitleUppercase() {
 
 		return 'LICENSING';
+
+	}
+
+	renderPageHeader() {
+
+		let pageHeader = this.pageHeader();
+		let logo = this.logo();
+		let createButton = this.createButton();
+		let returnButton = this.returnButton();
+		pageHeader.appendChild( logo );
+		pageHeader.appendChild( createButton );
+		pageHeader.appendChild( returnButton );
+		this.rootElement().appendChild( pageHeader );
+
+
+	}
+
+	overlayCloseButton() {
+
+		const el = document.createElement('div');
+		el.id='sacom-editor-overlay-close';
+		el.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="window-close" class="svg-inline--fa fa-window-close fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 394c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V86c0-3.3 2.7-6 6-6h404c3.3 0 6 2.7 6 6v340zM356.5 194.6L295.1 256l61.4 61.4c4.6 4.6 4.6 12.1 0 16.8l-22.3 22.3c-4.6 4.6-12.1 4.6-16.8 0L256 295.1l-61.4 61.4c-4.6 4.6-12.1 4.6-16.8 0l-22.3-22.3c-4.6-4.6-4.6-12.1 0-16.8l61.4-61.4-61.4-61.4c-4.6-4.6-4.6-12.1 0-16.8l22.3-22.3c4.6-4.6 12.1-4.6 16.8 0l61.4 61.4 61.4-61.4c4.6-4.6 12.1-4.6 16.8 0l22.3 22.3c4.7 4.6 4.7 12.1 0 16.8z"></path></svg>';
+		document.querySelector( '#sacom-editor-grid' ).appendChild( el );
+
+	}
+
+	renderEditForm() {
+
+		const el = document.createElement('div');
+		el.id = 'license-editor-form';
+		el.className = 'sacom-editor-form-primary';
+
+		this.fields.forEach( function( field, index ) {
+
+			var fieldKey = 'field_' + field.id;
+
+			const formRowEl = document.createElement('div');
+			formRowEl.className = 'sacom-form-row-block';
+
+			var h = '';
+			h += '<label for="' + fieldKey + '">' + field.label + '</label>';
+			h += '<input id="' + fieldKey + '" placeholder="' + field.placeholder + '" />';
+			formRowEl.innerHTML = h;
+
+			el.appendChild( formRowEl );
+
+		});
+
+		const statEl = document.createElement('div');
+		statEl.className = 'sacom-stat stat-license-id';
+		const statEl2 = document.createElement('h2');
+		const statEl3 = document.createElement('h4');
+		statEl3.innerHTML = 'LICENSE ID';
+		statEl.appendChild( statEl2 ).appendChild( statEl3 );
+
+		// Add to DOM.
+		const parentEl = document.querySelector( '#sacom-editor-column-main' );
+
+		console.log( parentEl )
+		console.log( el )
+
+		parentEl.appendChild( el );
+
+	}
+
+	initCreateMode() {
+
+		this.data.currentObjects.parent = {
+			model: false
+		}
+
+	}
+
+	parentSaveHandler() {
+
+		jQuery( document ).off( 'change.save', '#field_title' );
+
+		jQuery( document ).on( 'change.save', '#field_title', function() {
+
+			SACOM_EditorInstance.parseParentForm();
+			SACOM_EditorInstance.parentSaveRequest();
+
+		});
+
+	}
+
+	returnToListEvents() {
+
+		jQuery( document ).on( 'click', '#sacom-editor-overlay-close, #sacom-button-return button', function() {
+
+			SACOM_EditorInstance.clearUx();
+			SACOM_EditorInstance.renderPageHeader();
+			SACOM_EditorInstance.renderListFilters();
+			SACOM_EditorInstance.renderObjectListContainer();
+			SACOM_EditorInstance.loadList();
+
+		});
+
+	}
+
+	renderListFilters() {
+
+		// Filters.
+		var html = '';
+
+		// Sorting options.
+		html += '<div class="sacom-filters">';
+		html += '<h3 id="sort-asc" class="active">Newest First</h3>';
+		html += '<h3 id="sort-desc">Oldest First</h3>';
+		html += '</div>';
+
+		html += '<h3 class="list-section-header"></h3>';
+
+		jQuery( html ).appendTo( this.rootElement() );
+
+	}
+
+	objectListContainer() {
+
+		const el = document.createElement('div');
+		el.id = 'sacom-object-list';
+		return el;
+
+	}
+
+	renderObjectListContainer() {
+
+		const el = this.objectListContainer();
+		this.rootElement().appendChild( el );
+
+	}
+
+	loadList() {
+
+		this.loadListRequest();
+
+		jQuery( document ).off( 'sacom_editor_object_list_loaded sacom_editor_object_list_sorted' );
+		jQuery( document ).on( 'sacom_editor_object_list_loaded sacom_editor_object_list_sorted', function() {
+
+			var html = '';
+
+			console.log( SACOM_EditorInstance.objectList )
+
+			jQuery.each( SACOM_EditorInstance.objectList, function( index, item ) {
+
+				console.log( item )
+
+				html += '<div class="sacom-card" data-id="' + item.orderId + '">';
+
+				// Card Header.
+				html += '<div class="sacom-card-header">';
+				html += '<h4>Order ID ';
+				html += item.orderId;
+				html += '</h4>';
+				html += '</div>';
+
+				// Card Body.
+				html += '<div class="sacom-card-body">';
+				html += '<h2>';
+
+				html += '</h2>';
+				html += '</div>';
+
+				/* Card footer */
+				html += '<div class="sacom-card-footer">';
+				html += '<h4>';
+				html += 'STATUS: ' + item.status;
+				html += '</h4>';
+				html += '</div>';
+
+				/* Close card. */
+				html += '</div>';
+
+			});
+
+			html += '</div>';
+
+			jQuery( '#sacom-object-list' ).html( html )
+
+			// Edit button click.
+			jQuery('.sacom-card').on('click', function() {
+
+				let objectId = jQuery( this ).attr( 'data-id' );
+				SACOM_EditorInstance.modeSwitchEdit( objectId );
+
+			});
+
+			// Create new button click.
+			jQuery('#sacom-button-create').on('click', function() {
+
+				SACOM_EditorInstance.modeSwitchEdit( 0 );
+
+			});
+
+		});
+
+	}
+
+	loadListRequest() {
+
+		let data = {}
+		wp.ajax.post( 'sacom_license_loader', data ).done( function( response ) {
+
+			SACOM_EditorInstance.objectList = response.objects;
+
+			jQuery( document ).trigger({
+				type: 'sacom_editor_object_list_loaded'
+			});
+
+		});
 
 	}
 

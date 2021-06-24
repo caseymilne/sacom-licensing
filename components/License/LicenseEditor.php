@@ -2,6 +2,8 @@
 
 namespace SaberCommerce\Extension\Licensing;
 
+use \SaberCommerce\Field;
+
 class LicenseEditor {
 
 	public function init() {
@@ -108,12 +110,49 @@ class LicenseEditor {
 
 		$localizedData = [
 			'saberCommerceUrl' => SABER_COMMERCE_URL,
+			'fields'           => $this->fields()
 		];
+
 		wp_localize_script(
 			'sacom-license-editor',
 			'editorData',
 			$localizedData
 		);
+
+	}
+
+	function fields() {
+
+		$fs = [];
+
+		$f              = new Field();
+		$f->id          = 'title';
+		$f->label       = __( 'Title', 'saber-commerce' );
+		$f->placeholder = __( 'Enter a title.', 'saber-commerce' );
+		$fs[] = $f;
+
+		$f              = new Field();
+		$f->type        = 'textarea';
+		$f->id          = 'description';
+		$f->label       = __( 'Description', 'saber-commerce' );
+		$f->placeholder = __( 'Enter a description.', 'saber-commerce' );
+		$fs[] = $f;
+
+		$f              = new Field();
+		$f->type        = 'select';
+		$f->id          = 'product';
+		$f->label       = __( 'Product', 'saber-commerce' );
+		$f->placeholder = __( 'Choose a product.', 'saber-commerce' );
+		$fs[] = $f;
+
+		$f              = new Field();
+		$f->type        = 'select';
+		$f->id          = 'duration';
+		$f->label       = __( 'Duration', 'saber-commerce' );
+		$f->placeholder = __( 'Choose duration.', 'saber-commerce' );
+		$fs[] = $f;
+
+		return $fs;
 
 	}
 
