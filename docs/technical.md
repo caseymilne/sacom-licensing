@@ -17,3 +17,17 @@ Does the plugin install? Does the plugin activate without errors? Is the DB tabl
 ## Schema Drafts
 
 ### License Schema
+
+id_license
+title,
+description,
+id_product,
+duration
+
+### License Key Schema
+
+id_license_key
+id_license
+id_account
+license_key
+domain

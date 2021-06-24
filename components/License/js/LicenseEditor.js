@@ -20,6 +20,56 @@ class SACOM_LicenseEditor {
 		subheader.appendChild( breadcrumbs );
 		this.rootElement().appendChild( subheader );
 
+		// Init all events.
+		this.eventsInit();
+
+	}
+
+	eventsInit() {
+
+		jQuery( '#sacom-button-create' ).on( 'click', function() {
+
+			SACOM_EditorInstance.modeSwitchEdit( 0 );
+
+		});
+
+	}
+
+	modeSwitchEdit( objectId ) {
+
+		SACOM_EditorInstance.clearUx();
+		SACOM_EditorInstance.renderPageHeader();
+		SACOM_EditorInstance.renderEditorGrid();
+		SACOM_EditorInstance.renderOverlayCloseButton();
+		SACOM_EditorInstance.renderEditForm();
+		SACOM_EditorInstance.childObjectListRender();
+
+		if( objectId ) {
+
+			let account = SACOM_EditorInstance.getLoadedObjectModel( objectId );
+
+			SACOM_EditorInstance.setCurrentParentObjectModel( account );
+			SACOM_EditorInstance.initEditMode();
+
+			jQuery( '#stat-account-users-count h2' ).html( account.users.length );
+
+			// Update Account ID.
+			jQuery( '#stat-account-id h2' ).html( account.accountId );
+
+		} else {
+
+			SACOM_EditorInstance.initCreateMode();
+
+		}
+
+		// Add save handler after UX rendered because it contains change events that may fire when setting up fields.
+		SACOM_EditorInstance.parentSaveHandler();
+
+		/* Populate list of WP Users. */
+		SACOM_EditorInstance.wpUserOptionLoader();
+
+		// Do script or jQuery plugin init.
+		SACOM_EditorInstance.formScriptReinit()
 
 	}
 
