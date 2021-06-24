@@ -37,6 +37,8 @@ class LicenseEditor {
 
 			$obj->title        = $model['title'];
 			$obj->description  = $model['description'];
+			$obj->product      = $model['product'];
+			$obj->duration     = $model['duration'];
 			$obj->status       = 'active';
 			$response->save    = $obj->save();
 

@@ -162,7 +162,7 @@ class LicenseModel extends \SaberCommerce\Model {
 		$data = [
 			'title'        => $this->title,
 			'description'  => $this->description,
-			'products'     => $this->products,
+			'products'     => $this->product,
 		];
 
 		if( $this->duration ) {

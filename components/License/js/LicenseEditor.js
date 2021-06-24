@@ -287,9 +287,9 @@ class SACOM_LicenseEditor {
 
 	parentSaveHandler() {
 
-		jQuery( document ).off( 'change.save', '#field_title' );
+		jQuery( document ).off( 'change.save', '#field_title, #field_description, #field_product, #field_duration' );
 
-		jQuery( document ).on( 'change.save', '#field_title', function() {
+		jQuery( document ).on( 'change.save', '#field_title, #field_description, #field_product, #field_duration', function() {
 
 			console.log( 'change.save... ' );
 
@@ -403,7 +403,7 @@ class SACOM_LicenseEditor {
 			});
 
 			// Create new button click.
-			jQuery('#sacom-button-create').on('click', function() {
+			jQuery( document ).on( 'click', '#sacom-button-create', function() {
 
 				SACOM_EditorInstance.modeSwitchEdit( 0 );
 
@@ -436,7 +436,7 @@ class SACOM_LicenseEditor {
 
 		SACOM_EditorInstance.data.currentObjects.parent.model.title       = jQuery( '#field_title' ).val();
 		SACOM_EditorInstance.data.currentObjects.parent.model.description = jQuery( '#field_description' ).val();
-		SACOM_EditorInstance.data.currentObjects.parent.model.products    = jQuery( '#field_products' ).val();
+		SACOM_EditorInstance.data.currentObjects.parent.model.product     = jQuery( '#field_product' ).val();
 		SACOM_EditorInstance.data.currentObjects.parent.model.duration    = jQuery( '#field_duration' ).val();
 
 	}
@@ -533,9 +533,9 @@ class SACOM_LicenseEditor {
 
 		}
 
-		if( model.products ) {
+		if( model.product ) {
 
-			jQuery( '#field_products' ).val( model.products );
+			jQuery( '#field_product' ).val( model.product );
 
 		}
 
