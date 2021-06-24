@@ -62,8 +62,9 @@ class LicenseComponent extends \SaberCommerce\Component {
 		/* Install license table */
 		$tableName = $wpdb->prefix . 'sacom_license';
 		$sql = "CREATE TABLE $tableName (
-			id_license mediumint(9) NOT NULL AUTO_INCREMENT,
-			PRIMARY KEY (id_license)
+			id_license mediumint( 9 ) NOT NULL AUTO_INCREMENT,
+			status varchar( 255 ) DEFAULT 'active' NOT NULL,
+			PRIMARY KEY ( id_license )
 		) $charsetCollate;";
 		dbDelta( $sql );
 

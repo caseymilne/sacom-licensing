@@ -253,7 +253,7 @@ class SACOM_LicenseEditor {
 			var fieldKey = 'field_' + field.id;
 
 			const formRowEl = document.createElement('div');
-			formRowEl.className = 'sacom-form-row-block';
+			formRowEl.className = 'sacom-form-field';
 
 			var h = '';
 			h += '<label for="' + fieldKey + '">' + field.label + '</label>';
@@ -363,12 +363,12 @@ class SACOM_LicenseEditor {
 
 				console.log( item )
 
-				html += '<div class="sacom-card" data-id="' + item.orderId + '">';
+				html += '<div class="sacom-card" data-id="' + item.licenseId + '">';
 
 				// Card Header.
 				html += '<div class="sacom-card-header">';
-				html += '<h4>Order ID ';
-				html += item.orderId;
+				html += '<h4>License ID ';
+				html += item.licenseId;
 				html += '</h4>';
 				html += '</div>';
 
