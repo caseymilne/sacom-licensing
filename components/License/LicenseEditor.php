@@ -89,6 +89,18 @@ class LicenseEditor {
 
 		});
 
+		add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
+
+			if ( 'sacom-license-editor' !== $handle ) {
+				return $tag;
+			}
+
+			// change the script tag by adding type="module" and return it.
+			$tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+			return $tag;
+
+		}, 10, 3 );
+
 	}
 
 	public function enqueueEditorScript() {
@@ -152,6 +164,13 @@ class LicenseEditor {
 		$f->id          = 'duration';
 		$f->label       = __( 'Duration', 'saber-commerce' );
 		$f->placeholder = __( 'Choose duration.', 'saber-commerce' );
+		$fs[] = $f;
+
+		$f              = new Field();
+		$f->type        = 'text';
+		$f->id          = 'status';
+		$f->label       = __( 'Status', 'saber-commerce' );
+		$f->placeholder = __( 'Choose status.', 'saber-commerce' );
 		$fs[] = $f;
 
 		return $fs;

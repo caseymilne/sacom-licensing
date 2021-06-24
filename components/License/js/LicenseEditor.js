@@ -1,3 +1,5 @@
+import Editor from '../../../../saber-commerce/js/Editor.js';
+
 class SACOM_LicenseEditor {
 
 	init() {
@@ -33,7 +35,7 @@ class SACOM_LicenseEditor {
 		// Init all events.
 		this.eventsInit();
 
-
+		this.sortingSetup();
 
 	}
 
@@ -56,12 +58,8 @@ class SACOM_LicenseEditor {
 		SACOM_EditorInstance.editorGrid();
 		SACOM_EditorInstance.overlayCloseButton();
 		SACOM_EditorInstance.renderEditForm();
-		// SACOM_EditorInstance.childObjectListRender();
 
 		if( objectId ) {
-
-			console.log( objectId )
-			console.log( this.data )
 
 			let license = SACOM_EditorInstance.getLoadedObjectModel( objectId );
 
@@ -529,9 +527,74 @@ class SACOM_LicenseEditor {
 
 		}
 
+		if( model.description ) {
+
+			jQuery( '#field_description' ).val( model.description );
+
+		}
+
+		if( model.products ) {
+
+			jQuery( '#field_products' ).val( model.products );
+
+		}
+
+		if( model.duration ) {
+
+			jQuery( '#field_duration' ).val( model.duration );
+
+		}
+
+		jQuery( '#field_status' ).val( model.status );
+
 		// Update License ID.
 		jQuery( '#stat-license-id h2' ).html( model.licenseId );
 
+
+	}
+
+	/* Sorting Functions */
+
+	sortingSetup() {
+
+		jQuery( document ).on( 'click', '#sort-asc', function() {
+
+			jQuery( '.sacom-filters h3' ).removeClass( 'active' );
+			jQuery( this ).addClass( 'active' );
+			var sorted = SACOM_EditorInstance.objectList.sort( SACOM_EditorInstance.sortAsc );
+			jQuery( document ).trigger({
+				type: 'sacom_editor_object_list_sorted'
+			});
+
+			jQuery( '.list-section-header' ).html( 'Most Recent' );
+
+		});
+
+		jQuery( document ).on( 'click', '#sort-desc', function() {
+
+			jQuery( '.sacom-filters h3' ).removeClass( 'active' );
+			jQuery( this ).addClass( 'active' );
+			var sorted = SACOM_EditorInstance.objectList.sort( SACOM_EditorInstance.sortDesc );
+
+			jQuery( document ).trigger({
+				type: 'sacom_editor_object_list_sorted'
+			});
+
+			jQuery( '.list-section-header' ).html( 'Oldest Licenses' );
+
+		});
+
+	}
+
+	sortAsc( a, b ) {
+
+		return a.orderId > b.orderId ? -1 : 1;
+
+	}
+
+	sortDesc( a, b ) {
+
+		return a.orderId < b.orderId ? -1 : 1;
 
 	}
 
