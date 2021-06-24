@@ -181,10 +181,21 @@ class LicenseEditor {
 		$fs[] = $f;
 
 		$f              = new Field();
-		$f->type        = 'text';
+		$f->type        = 'toggle';
 		$f->id          = 'status';
 		$f->label       = __( 'Status', 'saber-commerce' );
 		$f->placeholder = __( 'Choose status.', 'saber-commerce' );
+		$f->default     = 'active';
+		$f->choices = [
+			[
+				'value' => 'active',
+				'label' => __( 'ACTIVE', 'saber-commerce' )
+			],
+			[
+				'value' => 'archived',
+				'label' => __( 'ARCHIVED', 'saber-commerce' )
+			]
+		];
 		$fs[] = $f;
 
 		return $fs;

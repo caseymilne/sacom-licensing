@@ -26,6 +26,11 @@ class SACOM_LicenseEditor {
 		// Build header.
 		this.editor = new Editor();
 		this.editor.renderPageHeader();
+		SACOM_EditorInstance.renderListFilters();
+		SACOM_EditorInstance.renderObjectListContainer();
+		SACOM_EditorInstance.loadList();
+
+		// Toggle field events.
 		this.editor.toggleField.events();
 
 		// Init all events.
@@ -87,8 +92,8 @@ class SACOM_LicenseEditor {
 		const el3 = document.createElement('div');
 		el3.id = 'editor-message-container';
 
+		el2.appendChild( el3 );
 		el.appendChild( el2 );
-		el.appendChild( el3 );
 
 		/* Editor grid body. */
 		const el4 = document.createElement('div');
@@ -105,12 +110,12 @@ class SACOM_LicenseEditor {
 		const el5 = document.createElement('div');
 		el5.id = 'sacom-editor-column-main';
 		el5.className = 'sacom-editor-column-main';
-		el.appendChild( el5 );
+		el4.appendChild( el5 );
 
 		const el6 = document.createElement('div');
 		el6.id = 'sacom-editor-column-right';
 		el6.className = 'sacom-editor-column-right';
-		el.appendChild( el6 );
+		el4.appendChild( el6 );
 
 		this.rootElement().appendChild( el );
 
@@ -278,6 +283,7 @@ class SACOM_LicenseEditor {
 	makeToggleField( field ) {
 
 		const el = document.createElement( 'div' );
+		el.className = 'sacom-form-field';
 
 		// Add label.
 		const labelEl = document.createElement( 'label' );
@@ -470,6 +476,7 @@ class SACOM_LicenseEditor {
 		SACOM_EditorInstance.data.currentObjects.parent.model.description = jQuery( '#field_description' ).val();
 		SACOM_EditorInstance.data.currentObjects.parent.model.product     = jQuery( '#field_product' ).val();
 		SACOM_EditorInstance.data.currentObjects.parent.model.duration    = jQuery( '#field_duration' ).val();
+		SACOM_EditorInstance.data.currentObjects.parent.model.status      = jQuery( '#field_status' ).val();
 
 	}
 
