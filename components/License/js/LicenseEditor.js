@@ -287,9 +287,9 @@ class SACOM_LicenseEditor {
 
 	parentSaveHandler() {
 
-		jQuery( document ).off( 'change.save', '#field_title, #field_description, #field_product, #field_duration' );
+		jQuery( document ).off( 'change.save', '#field_title, #field_description, #field_product, #field_duration, #field_status' );
 
-		jQuery( document ).on( 'change.save', '#field_title, #field_description, #field_product, #field_duration', function() {
+		jQuery( document ).on( 'change.save', '#field_title, #field_description, #field_product, #field_duration, #field_status', function() {
 
 			console.log( 'change.save... ' );
 

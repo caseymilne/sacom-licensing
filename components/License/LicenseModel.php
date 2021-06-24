@@ -9,7 +9,7 @@ class LicenseModel extends \SaberCommerce\Model {
 	public $licenseId;
 	public $title;
 	public $description;
-	public $products;
+	public $product;
 	public $duration;
 	public $status;
 	public $table = 'license';
@@ -148,7 +148,8 @@ class LicenseModel extends \SaberCommerce\Model {
 		$license->licenseId   = $row->id_license;
 		$license->title       = $row->title;
 		$license->description = $row->description;
-		$license->products    = $row->products;
+		$license->product     = $row->product;
+		$license->duration    = $row->duration;
 		$license->status      = $row->status;
 		return $license;
 
@@ -162,7 +163,7 @@ class LicenseModel extends \SaberCommerce\Model {
 		$data = [
 			'title'        => $this->title,
 			'description'  => $this->description,
-			'products'     => $this->product,
+			'product'      => $this->product
 		];
 
 		if( $this->duration ) {

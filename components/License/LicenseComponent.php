@@ -68,7 +68,7 @@ class LicenseComponent extends \SaberCommerce\Component {
 			id_license mediumint( 9 ) NOT NULL AUTO_INCREMENT,
 			title varchar( 255 ) NOT NULL,
 			description tinytext NULL,
-			products tinytext NULL,
+			product tinytext NULL,
 			duration varchar( 128 ) DEFAULT 'year' NOT NULL,
 			status varchar( 255 ) DEFAULT 'active' NOT NULL,
 			PRIMARY KEY ( id_license )
