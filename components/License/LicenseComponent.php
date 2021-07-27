@@ -56,7 +56,7 @@ class LicenseComponent extends \SaberCommerce\Component {
 
 	}
 
-	public function activation() {
+	public function activation( $ae ) {
 
 		global $wpdb;
 		$charsetCollate = $wpdb->get_charset_collate();

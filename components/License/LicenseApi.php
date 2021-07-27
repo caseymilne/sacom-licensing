@@ -33,6 +33,34 @@ class LicenseApi extends \WP_REST_Controller {
 			]
 		);
 
+		/* License key verification. */
+		register_rest_route( 'sacom/v1', '/license/verify',
+			[
+				'methods' => 'POST',
+				'callback' => [ $this, 'verify' ],
+			]
+		);
+
+	}
+
+	function verify( $request ) {
+
+		$response = new \stdClass;
+
+		$params = $request->get_params();
+		$response->params = $params;
+
+		// Fetch license model.
+		$lm = new LicenseModel();
+		$license = $lm->fetchOne( $params['license'] );
+		$response->license = $license;
+
+		// Verify key.
+		$isVerified = $lm->verify( $params['key'] );
+		$response->verified = $isVerified;
+
+		return $response;
+
 	}
 
 	public function getLicenseCollection() {

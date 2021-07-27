@@ -18,7 +18,6 @@ class LicenseModel extends \SaberCommerce\Model {
 
 		global $wpdb;
 		$where = '1=1';
-		$where .= " AND id_license = $licenseId";
 		$tss = $wpdb->get_results(
 			"SELECT * FROM " .
 			$this->tableName() .
@@ -216,10 +215,20 @@ class LicenseModel extends \SaberCommerce\Model {
 
 	}
 
-	protected function tableName() {
+	function tableName() {
 
 		global $wpdb;
 		return $wpdb->prefix . 'sacom_' . $this->table;
+
+	}
+
+	function verify( $key ) {
+
+		if( $key === '8736-0293-9345-1293' ) {
+			return 1;
+		}
+
+		return 0;
 
 	}
 

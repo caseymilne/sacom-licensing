@@ -53,8 +53,9 @@ class Plugin {
 
 	public static function activation() {
 
+		$ae = false;
 		$c = new LicenseComponent();
-		$c->activation();
+		$c->activation( $ae );
 
 	}
 
