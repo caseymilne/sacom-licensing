@@ -52,6 +52,7 @@ class LicenseComponent extends \SaberCommerce\Component {
 
 	public function adminCallback() {
 
+		print '<div id="sacom-license-editor"></div>';
 		print '<sacom-license-editor />';
 
 	}

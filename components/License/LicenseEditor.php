@@ -124,6 +124,14 @@ class LicenseEditor {
 			1
 		);
 
+		wp_enqueue_script(
+			'sacom-license-editor-react',
+			SABER_COMMERCE_LICENSING_URL . '/build/index.js',
+			[ 'wp-element' ],
+			\SaberCommerce\Plugin::getEnqueueVersion(),
+			1
+		);
+
 		$localizedData = [
 			'saberCommerceUrl' => SABER_COMMERCE_URL,
 			'fields'           => $this->fields(),
