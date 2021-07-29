@@ -76,6 +76,15 @@ class LicenseComponent extends \SaberCommerce\Component {
 		) $charsetCollate;";
 		dbDelta( $sql );
 
+		/* Install license key table */
+		$tableName = $wpdb->prefix . 'sacom_license_key';
+		$sql = "CREATE TABLE $tableName (
+			id_license_key mediumint( 9 ) NOT NULL AUTO_INCREMENT,
+			license_key varchar( 255 ) NOT NULL,
+			PRIMARY KEY ( id_license_key )
+		) $charsetCollate;";
+		dbDelta( $sql );
+
 	}
 
 }

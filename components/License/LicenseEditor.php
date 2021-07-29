@@ -135,7 +135,8 @@ class LicenseEditor {
 		$localizedData = [
 			'saberCommerceUrl' => SABER_COMMERCE_URL,
 			'fields'           => $this->fields(),
-			'strings'          => $this->strings()
+			'strings'          => $this->strings(),
+			'models'           => $this->models()
 		];
 
 		wp_localize_script(
@@ -207,6 +208,20 @@ class LicenseEditor {
 		$fs[] = $f;
 
 		return $fs;
+
+	}
+
+	function models() {
+
+		$models = [];
+
+		$m = new LicenseKeyModel();
+		$model = new \stdClass;
+		$model->definition = $m->definition();
+		$model->collection = $m->fetchAll();
+		$models[] = $model;
+
+		return $models;
 
 	}
 

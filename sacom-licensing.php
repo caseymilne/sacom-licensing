@@ -29,6 +29,7 @@ class Plugin {
 		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseComponent.php' );
 		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseEditor.php' );
 		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseModel.php' );
+		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseKeyModel.php' );
 		require( SABER_COMMERCE_LICENSING_PATH . 'components/License/LicenseApi.php' );
 
 		add_filter( 'sacom_component_list', function( $components ) {

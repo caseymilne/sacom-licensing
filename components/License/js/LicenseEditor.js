@@ -4,8 +4,6 @@ class SACOM_LicenseEditor {
 
 	init() {
 
-		console.log('Init LicenseEditor...')
-
 		this.data = {
 			currentObjects: {
 				parent: {
@@ -20,7 +18,6 @@ class SACOM_LicenseEditor {
 		}
 
 		// Localize fields.
-		console.log( editorData )
 		this.fields = editorData.fields;
 
 		// Build header.
@@ -257,9 +254,6 @@ class SACOM_LicenseEditor {
 		// Add to DOM.
 		const parentEl = document.querySelector( '#sacom-editor-column-main' );
 
-		console.log( parentEl )
-		console.log( el )
-
 		parentEl.appendChild( el );
 
 	}
@@ -329,9 +323,6 @@ class SACOM_LicenseEditor {
 
 		jQuery( document ).on( 'change.save', '#field_title, #field_description, #field_product, #field_duration, #field_status', function() {
 
-			console.log( 'change.save... ' );
-
-
 			SACOM_EditorInstance.parseParentForm();
 			SACOM_EditorInstance.parentSaveRequest();
 
@@ -394,11 +385,7 @@ class SACOM_LicenseEditor {
 
 			var html = '';
 
-			console.log( SACOM_EditorInstance.objectList )
-
 			jQuery.each( SACOM_EditorInstance.objectList, function( index, item ) {
-
-				console.log( item )
 
 				html += '<div class="sacom-card" data-id="' + item.licenseId + '">';
 
@@ -557,8 +544,6 @@ class SACOM_LicenseEditor {
 	initEditMode() {
 
 		let model = SACOM_EditorInstance.getCurrentParentObjectModel();
-
-		console.log( model )
 
 		if( model.title ) {
 
