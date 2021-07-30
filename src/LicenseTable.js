@@ -40,6 +40,8 @@ class LicenseTable extends React.Component {
 
 		const { classes } = this.props;
 
+		console.log( this.props.models )
+
 		return(
 			<TableContainer component={Paper}>
 				<Table className={classes.licenseTable} aria-label="simple table">

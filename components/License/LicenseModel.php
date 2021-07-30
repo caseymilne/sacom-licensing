@@ -232,5 +232,35 @@ class LicenseModel extends \SaberCommerce\Model {
 
 	}
 
+	function definition() {
+
+		$def = new \stdClass;
+		$def->key = 'license_key';
+		$def->fields = $this->fields();
+		return $def;
+
+	}
+
+	function fields() {
+
+		$fields = [];
+
+		$f = new \SaberCommerce\Field;
+		$f->key = 'id_license';
+		$f->propertyKey = 'licenseId';
+		$f->label = 'ID';
+		$f->tableDisplay = 1;
+		$fields[] = $f;
+
+		$f = new \SaberCommerce\Field;
+		$f->key = 'title';
+		$f->propertyKey = 'title';
+		$f->label = 'Title';
+		$f->tableDisplay = 1;
+		$fields[] = $f;
+
+		return $fields;
+
+	}
 
 }

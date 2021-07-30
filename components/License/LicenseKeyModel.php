@@ -32,9 +32,10 @@ class LicenseKeyModel extends \SaberCommerce\Model {
 	 */
 	public function load( $row ) {
 
-		$m      = new LicenseKeyModel();
-		$m->id  = $row->id_license_key;
-		$m->key = $row->license_key;
+		$m               = new LicenseKeyModel();
+		$m->licenseKeyId = $row->id_license_key;
+		$m->id           = $row->id_license_key;
+		$m->licenseKey   = $row->license_key;
 
 		return $m;
 

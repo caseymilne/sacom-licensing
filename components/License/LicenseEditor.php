@@ -215,6 +215,12 @@ class LicenseEditor {
 
 		$models = [];
 
+		$m = new LicenseModel();
+		$model = new \stdClass;
+		$model->definition = $m->definition();
+		$model->collection = $m->fetchAll();
+		$models[] = $model;
+
 		$m = new LicenseKeyModel();
 		$model = new \stdClass;
 		$model->definition = $m->definition();

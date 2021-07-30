@@ -6,7 +6,7 @@ This plugin provides 1 component, Licensing.
 
 ## Database Tables
 
-Licensing component installs 1 DB table, "sacom_license".
+Licensing component installs 2 DB tables, "sacom_license", "sacom_license_key".
 
 ## Testing Groups
 
