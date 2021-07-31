@@ -10,20 +10,22 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { HashRouter, Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 
 import LicenseKeyForm from './LicenseKeyForm.js';
+import LicenseForm from './LicenseForm.js';
+
 
 function PageLicenses() {
 
 	let history = useHistory();
 
-	function handleClick() {
+	function handleClickAddLicense() {
 
-		history.push("/keys");
+		history.push("/license-add");
 
 	}
 
 	return (
 		<React.Fragment>
-			<Button onClick={handleClick}>Add License</Button>
+			<Button onClick={handleClickAddLicense}>Add License</Button>
 			<LicenseTable
 					modelDefinition={editorData.models[0].definition}
 					models={editorData.models[0].collection}
@@ -63,6 +65,14 @@ function PageKeyAdd() {
 
 }
 
+	function PageLicenseAdd() {
+
+		return (
+			<LicenseForm model={editorData.models[0]} />
+		)
+
+	}
+
 function LicenseEditor() {
 
 	return (
@@ -82,6 +92,7 @@ function LicenseEditor() {
 				</nav>
 			<Switch>
 				<Route exact path="/licenses" component={PageLicenses} />
+				<Route exact path="/license-add" component={PageLicenseAdd} />
 				<Route exact path="/keys" component={PageKeys} />
 				<Route exact path="/keys-add" component={PageKeyAdd} />
 				<Redirect to="licenses" />

@@ -29022,6 +29022,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_LocationOn__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_LocationOn__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _LicenseKeyForm_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./LicenseKeyForm.js */ "./src/LicenseKeyForm.js");
+/* harmony import */ var _LicenseForm_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./LicenseForm.js */ "./src/LicenseForm.js");
 
 const {
   useState,
@@ -29037,15 +29038,16 @@ const {
 
 
 
+
 function PageLicenses() {
   let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["useHistory"])();
 
-  function handleClick() {
-    history.push("/keys");
+  function handleClickAddLicense() {
+    history.push("/license-add");
   }
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(React.Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    onClick: handleClick
+    onClick: handleClickAddLicense
   }, "Add License"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseTable_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     modelDefinition: editorData.models[0].definition,
     models: editorData.models[0].collection
@@ -29073,6 +29075,12 @@ function PageKeyAdd() {
   });
 }
 
+function PageLicenseAdd() {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseForm_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    model: editorData.models[0]
+  });
+}
+
 function LicenseEditor() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "sacom-license-editor"
@@ -29084,6 +29092,10 @@ function LicenseEditor() {
     exact: true,
     path: "/licenses",
     component: PageLicenses
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Route"], {
+    exact: true,
+    path: "/license-add",
+    component: PageLicenseAdd
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Route"], {
     exact: true,
     path: "/keys",
@@ -29098,6 +29110,99 @@ function LicenseEditor() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (LicenseEditor);
+
+/***/ }),
+
+/***/ "./src/LicenseForm.js":
+/*!****************************!*\
+  !*** ./src/LicenseForm.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LicenseKeyForm; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ModelFormRender_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModelFormRender.js */ "./src/ModelFormRender.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+function LicenseKeyForm(props) {
+  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["useHistory"])(); // Calculate the current form submit type.
+
+  function _submitType() {
+    return 'create';
+  } // Calculate the current form submit type.
+
+
+  function _submitType() {
+    return 'create';
+  } // Set the API base path.
+
+
+  function _apiPathBase() {
+    return '/sacom/v1/';
+  } // Set the API base path.
+
+
+  function _apiPathFull(endpoint) {
+    return _apiPathBase() + endpoint;
+  }
+
+  function fetchData() {}
+
+  function refreshTable() {}
+
+  function handleSubmit(values) {
+    console.log('handling submit... ');
+    console.log(values);
+
+    const type = _submitType();
+
+    const req = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+
+    if (type === 'create') {
+      req.path = _apiPathFull('license');
+      req.method = 'POST';
+    } else {
+      req.path = _apiPathFull('license' + this.state.editObject.id);
+      req.method = 'PUT';
+    }
+
+    const reqBody = {};
+    props.model.definition.fields.map(function (field) {
+      reqBody[field.key] = values[field.key];
+    });
+    req.body = JSON.stringify(reqBody);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()(req).then(response => {
+      fetchData();
+      refreshTable();
+    });
+  }
+
+  function cancel() {
+    history.push("/licenses");
+  }
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, "HR9232132", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_ModelFormRender_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    show: 1,
+    submit: handleSubmit,
+    cancel: cancel,
+    modelDefinition: props.model.definition,
+    modelData: props.model.collection
+  }));
+}
 
 /***/ }),
 
