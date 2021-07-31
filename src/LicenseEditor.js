@@ -9,6 +9,8 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import { HashRouter, Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 
+import LicenseKeyForm from './LicenseKeyForm.js';
+
 function PageLicenses() {
 
 	let history = useHistory();
@@ -56,10 +58,7 @@ function PageKeys() {
 function PageKeyAdd() {
 
 	return (
-		<form>
-			<label>KEY</label>
-			<input type="text" />
-		</form>
+		<LicenseKeyForm model={editorData.models[1]} />
 	)
 
 }

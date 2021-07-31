@@ -31,3 +31,8 @@ id_license
 id_account
 license_key
 domain
+
+### React Components
+
+#### LicenseKeyForm
+Functional component. Provides the form for key management.
