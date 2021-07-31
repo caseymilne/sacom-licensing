@@ -1,16 +1,13 @@
 const { useState, useEffect } = wp.element;
 import Button from '@material-ui/core/Button';
 import LicenseTable from './LicenseTable.js'
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import { HashRouter, Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 import LicenseKeyForm from './LicenseKeyForm.js';
 import LicenseForm from './LicenseForm.js';
+import LicenseTabs from './LicenseTabs.js';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -43,31 +40,6 @@ function PageLicenses() {
 					models={editorData.models[0].collection}
 			/>
 		</React.Fragment>
-	)
-
-}
-
-function LicenseTabs() {
-
-	const [value, setValue] = React.useState('/licenses');
-	let history = useHistory();
-
-	console.log( history )
-
-	const handleChange = (event, newValue) => {
-
-		console.log( newValue )
-
-		history.push( newValue );
-		setValue( newValue );
-
-	};
-
-	return (
-		<Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-			<Tab value="/licenses" label="Manage Licenses" />
-			<Tab value="/keys" label="Manage Keys" />
-		</Tabs>
 	)
 
 }
