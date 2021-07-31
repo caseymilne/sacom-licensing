@@ -33,11 +33,33 @@ function PageLicenses() {
 
 function PageKeys() {
 
+	let history = useHistory();
+
+	function handleClickAddKey() {
+
+		history.push("/keys-add");
+
+	}
+
 	return (
-		<LicenseTable
-				modelDefinition={editorData.models[1].definition}
-				models={editorData.models[1].collection}
-		/>
+		<React.Fragment>
+			<Button onClick={handleClickAddKey}>Add Key</Button>
+			<LicenseTable
+					modelDefinition={editorData.models[1].definition}
+					models={editorData.models[1].collection}
+			/>
+		</React.Fragment>
+	)
+
+}
+
+function PageKeyAdd() {
+
+	return (
+		<form>
+			<label>KEY</label>
+			<input type="text" />
+		</form>
 	)
 
 }
@@ -62,6 +84,7 @@ function LicenseEditor() {
 			<Switch>
 				<Route exact path="/licenses" component={PageLicenses} />
 				<Route exact path="/keys" component={PageKeys} />
+				<Route exact path="/keys-add" component={PageKeyAdd} />
 				<Redirect to="licenses" />
 			</Switch>
 		</HashRouter>

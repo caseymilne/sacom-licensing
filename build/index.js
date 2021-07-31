@@ -20205,10 +20205,24 @@ function PageLicenses() {
 }
 
 function PageKeys() {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseTable_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["useHistory"])();
+
+  function handleClickAddKey() {
+    history.push("/keys-add");
+  }
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(React.Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    onClick: handleClickAddKey
+  }, "Add Key"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseTable_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     modelDefinition: editorData.models[1].definition,
     models: editorData.models[1].collection
-  });
+  }));
+}
+
+function PageKeyAdd() {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("form", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", null, "KEY"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
+    type: "text"
+  }));
 }
 
 function LicenseEditor() {
@@ -20226,6 +20240,10 @@ function LicenseEditor() {
     exact: true,
     path: "/keys",
     component: PageKeys
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Route"], {
+    exact: true,
+    path: "/keys-add",
+    component: PageKeyAdd
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Redirect"], {
     to: "licenses"
   }))));
