@@ -13,13 +13,6 @@ export default function LicenseKeyForm( props ) {
 
 	}
 
-	// Calculate the current form submit type.
-	function _submitType() {
-
-		return 'create';
-
-	}
-
 	// Set the API base path.
 	function _apiPathBase() {
 
@@ -98,8 +91,6 @@ export default function LicenseKeyForm( props ) {
 
 	return (
 		<div>
-
-			HR9232132
 
 			<ModelFormRender
 				show={1}
