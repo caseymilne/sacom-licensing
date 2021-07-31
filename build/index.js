@@ -29116,11 +29116,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ModelFormRender_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModelFormRender.js */ "./src/ModelFormRender.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
 function LicenseKeyForm(props) {
-  // Calculate the current form submit type.
+  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["useHistory"])(); // Calculate the current form submit type.
+
   function _submitType() {
     return 'create';
   } // Calculate the current form submit type.
@@ -29133,7 +29136,16 @@ function LicenseKeyForm(props) {
 
   function _apiPathBase() {
     return '/sacom/v1/';
+  } // Set the API base path.
+
+
+  function _apiPathFull(endpoint) {
+    return _apiPathBase() + endpoint;
   }
+
+  function fetchData() {}
+
+  function refreshTable() {}
 
   function handleSubmit(values) {
     console.log('handling submit... ');
@@ -29149,10 +29161,10 @@ function LicenseKeyForm(props) {
     };
 
     if (type === 'create') {
-      req.path = _apiPathBase() + 'tax-rate';
+      req.path = _apiPathFull('license/key');
       req.method = 'POST';
     } else {
-      req.path = _apiPathBase() + 'tax-rate/' + this.state.editObject.id;
+      req.path = _apiPathFull('license/key' + this.state.editObject.id);
       req.method = 'PUT';
     }
 
@@ -29163,12 +29175,14 @@ function LicenseKeyForm(props) {
     console.log(reqBody);
     req.body = JSON.stringify(reqBody);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()(req).then(response => {
-      this.fetchData();
-      this.refreshTable();
+      fetchData();
+      refreshTable();
     });
   }
 
-  function cancel() {}
+  function cancel() {
+    history.push("/keys");
+  }
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_ModelFormRender_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
     show: 1,

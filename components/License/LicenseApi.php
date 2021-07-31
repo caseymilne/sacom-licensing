@@ -19,6 +19,22 @@ class LicenseApi extends \WP_REST_Controller {
 			]
 		);
 
+		/* License Key Routes */
+
+		register_rest_route( 'sacom/v1', '/license/key',
+			[
+				'methods' => \WP_REST_Server::READABLE,
+				'callback' => [ $this, 'getLicenseKeyCollection' ],
+			]
+		);
+
+		register_rest_route( 'sacom/v1', '/license/key',
+			[
+				'methods' => 'POST',
+				'callback' => [ $this, 'createLicenseKey' ],
+			]
+		);
+
 		register_rest_route( 'sacom/v1', '/license/(?P<id>\d+)',
 			[
 				'methods' => \WP_REST_Server::READABLE,
@@ -32,6 +48,8 @@ class LicenseApi extends \WP_REST_Controller {
 				),
 			]
 		);
+
+
 
 		/* License key verification. */
 		register_rest_route( 'sacom/v1', '/license/verify',
@@ -84,6 +102,24 @@ class LicenseApi extends \WP_REST_Controller {
 		}
 
 		return $license;
+
+	}
+
+	public function getLicenseKeyCollection() {
+
+		$m = new LicenseKeyModel();
+		$keys = $m->fetchAll();
+		$response = [
+			'license_keys' => $keys
+		];
+		return $response;
+
+	}
+
+	function createLicenseKey() {
+
+		$response = 1;
+		return $response;
 
 	}
 

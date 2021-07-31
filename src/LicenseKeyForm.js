@@ -1,7 +1,10 @@
 import apiFetch from '@wordpress/api-fetch';
 import ModelFormRender from './ModelFormRender.js';
+import { useHistory } from "react-router-dom";
 
 export default function LicenseKeyForm( props ) {
+
+	let history = useHistory();
 
 	// Calculate the current form submit type.
 	function _submitType() {
@@ -24,6 +27,24 @@ export default function LicenseKeyForm( props ) {
 
 	}
 
+	// Set the API base path.
+	function _apiPathFull( endpoint ) {
+
+		return _apiPathBase() + endpoint;
+
+	}
+
+	function fetchData() {
+
+
+	}
+
+	function refreshTable() {
+
+
+
+	}
+
 	function handleSubmit( values ) {
 
 		console.log( 'handling submit... ')
@@ -39,11 +60,15 @@ export default function LicenseKeyForm( props ) {
 		}
 
 		if( type === 'create' ) {
-			req.path = _apiPathBase() + 'tax-rate';
+
+			req.path = _apiPathFull( 'license/key' );
 			req.method = 'POST';
+
 		} else {
-			req.path = _apiPathBase() + 'tax-rate/' + this.state.editObject.id;
+
+			req.path = _apiPathFull( 'license/key' + this.state.editObject.id );
 			req.method = 'PUT';
+
 		}
 
 		const reqBody = {}
@@ -60,14 +85,16 @@ export default function LicenseKeyForm( props ) {
 
 		apiFetch( req ).then( ( response ) => {
 
-			this.fetchData();
-			this.refreshTable();
+			fetchData();
+			refreshTable();
 
 		});
 
 	}
 
 	function cancel() {
+
+		history.push("/keys");
 
 	}
 
