@@ -7,6 +7,7 @@ import LicenseTable from './LicenseTable.js'
 import { HashRouter, Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 import LicenseKeyForm from './LicenseKeyForm.js';
 import LicenseTabs from './LicenseTabs.js';
+import PageKeyAdd from './PageKeyAdd.js';
 import PageLicenseAdd from './PageLicenseAdd.js';
 import SaberCommerceLogo from './SaberCommerceLogo.js';
 import AppBar from '@material-ui/core/AppBar';
@@ -55,14 +56,6 @@ function PageKeys() {
 					models={editorData.models[1].collection}
 			/>
 		</React.Fragment>
-	)
-
-}
-
-function PageKeyAdd() {
-
-	return (
-		<LicenseKeyForm model={editorData.models[1]} />
 	)
 
 }

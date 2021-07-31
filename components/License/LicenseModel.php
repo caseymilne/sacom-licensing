@@ -259,6 +259,14 @@ class LicenseModel extends \SaberCommerce\Model {
 		$f->tableDisplay = 1;
 		$fields[] = $f;
 
+		$f = new \SaberCommerce\Field;
+		$f->type = 'textarea';
+		$f->key = 'description';
+		$f->propertyKey = 'description';
+		$f->label = 'License Description';
+		$f->tableDisplay = 0;
+		$fields[] = $f;
+
 		return $fields;
 
 	}

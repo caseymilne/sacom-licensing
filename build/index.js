@@ -30696,17 +30696,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _LicenseKeyForm_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LicenseKeyForm.js */ "./src/LicenseKeyForm.js");
 /* harmony import */ var _LicenseTabs_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LicenseTabs.js */ "./src/LicenseTabs.js");
-/* harmony import */ var _PageLicenseAdd_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PageLicenseAdd.js */ "./src/PageLicenseAdd.js");
-/* harmony import */ var _SaberCommerceLogo_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SaberCommerceLogo.js */ "./src/SaberCommerceLogo.js");
-/* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/AppBar */ "./node_modules/@material-ui/core/esm/AppBar/index.js");
-/* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Toolbar */ "./node_modules/@material-ui/core/esm/Toolbar/index.js");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _PageKeyAdd_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PageKeyAdd.js */ "./src/PageKeyAdd.js");
+/* harmony import */ var _PageLicenseAdd_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./PageLicenseAdd.js */ "./src/PageLicenseAdd.js");
+/* harmony import */ var _SaberCommerceLogo_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SaberCommerceLogo.js */ "./src/SaberCommerceLogo.js");
+/* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/AppBar */ "./node_modules/@material-ui/core/esm/AppBar/index.js");
+/* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Toolbar */ "./node_modules/@material-ui/core/esm/Toolbar/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
 
 const {
   useState,
   useEffect
 } = wp.element;
+
 
 
 
@@ -30750,12 +30752,6 @@ function PageKeys() {
   }));
 }
 
-function PageKeyAdd() {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseKeyForm_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    model: editorData.models[1]
-  });
-}
-
 const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(theme => ({
   appBarBg: {
     backgroundColor: '#F3F3F3'
@@ -30766,20 +30762,20 @@ function LicenseEditor() {
   const classes = useStyles();
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "sacom-license-editor"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["HashRouter"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["HashRouter"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_10__["default"], {
     position: "static",
     color: "default",
     classes: {
       colorDefault: classes.appBarBg
     }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_10__["default"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_SaberCommerceLogo_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseTabs_js__WEBPACK_IMPORTED_MODULE_6__["default"], null))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_11__["default"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_SaberCommerceLogo_js__WEBPACK_IMPORTED_MODULE_9__["default"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseTabs_js__WEBPACK_IMPORTED_MODULE_6__["default"], null))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/licenses",
     component: PageLicenses
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/licenses/add",
-    component: _PageLicenseAdd_js__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _PageLicenseAdd_js__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/keys",
@@ -30787,7 +30783,7 @@ function LicenseEditor() {
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/keys/add",
-    component: PageKeyAdd
+    component: _PageKeyAdd_js__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
     to: "/licenses"
   }))));
@@ -31263,6 +31259,29 @@ function App(props) {
       onClick: props.cancel
     }, "Cancel")));
   }
+}
+
+/***/ }),
+
+/***/ "./src/PageKeyAdd.js":
+/*!***************************!*\
+  !*** ./src/PageKeyAdd.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PageKeyAdd; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _LicenseKeyForm_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LicenseKeyForm.js */ "./src/LicenseKeyForm.js");
+
+
+function PageKeyAdd() {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_LicenseKeyForm_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    model: editorData.models[1]
+  });
 }
 
 /***/ }),
