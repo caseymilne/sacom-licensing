@@ -25,7 +25,6 @@ class LicenseTable extends React.Component {
 		let renderFields = [];
 		this.props.modelDefinition.fields.map( function( field ) {
 
-			console.log( field );
 			if( field.tableDisplay !== undefined && field.tableDisplay > 0 ) {
 				renderFields.push( field );
 			}
@@ -39,8 +38,6 @@ class LicenseTable extends React.Component {
 	render() {
 
 		const { classes } = this.props;
-
-		console.log( this.props.models )
 
 		return(
 			<TableContainer component={Paper}>
