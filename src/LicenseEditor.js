@@ -7,7 +7,7 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-import { BrowserRouter as Router, Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
+import { HashRouter, Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
 
 function PageLicenses() {
 
@@ -48,23 +48,23 @@ function LicenseEditor() {
 
 		<div class="sacom-license-editor">
 
-			<Router basename="/wp-admin/admin.php?page=sacom-license">
+			<HashRouter>
 				<nav>
 					<ul>
 						<li>
-							<Link to="/licenses">Manage Licenses</Link>
+							<Link to="licenses">Manage Licenses</Link>
 						</li>
 						<li>
-							<Link to="/keys">Manage Keys</Link>
+							<Link to="keys">Manage Keys</Link>
 						</li>
 					</ul>
 				</nav>
 			<Switch>
 				<Route exact path="/licenses" component={PageLicenses} />
 				<Route exact path="/keys" component={PageKeys} />
-				<Redirect to="/licenses" />
+				<Redirect to="licenses" />
 			</Switch>
-		</Router>
+		</HashRouter>
 		</div>
 	)
 

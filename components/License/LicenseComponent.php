@@ -13,6 +13,8 @@ class LicenseComponent extends \SaberCommerce\Component {
 		/* Load editor. */
 		add_action( 'admin_enqueue_scripts', function( $adminPage ) {
 
+			// var_dump( $adminPage );
+
 			if( 'saber-commerce_page_sacom-license' === $adminPage ) {
 
 				$editor = new LicenseEditor();
@@ -52,8 +54,9 @@ class LicenseComponent extends \SaberCommerce\Component {
 
 	public function adminCallback() {
 
-		print '<div id="sacom-license-editor"></div>';
 		print '<sacom-license-editor />';
+		print '<div id="sacom-license-editor"></div>';
+
 
 	}
 
