@@ -28,6 +28,14 @@ class LicenseApi extends \WP_REST_Controller {
 			]
 		);
 
+		/* License Create. */
+		register_rest_route( 'sacom/v1', '/license',
+			[
+				'methods' => 'POST',
+				'callback' => [ $this, 'createLicense' ],
+			]
+		);
+
 		register_rest_route( 'sacom/v1', '/license/key',
 			[
 				'methods' => 'POST',
@@ -112,6 +120,14 @@ class LicenseApi extends \WP_REST_Controller {
 		$response = [
 			'license_keys' => $keys
 		];
+		return $response;
+
+	}
+
+	/* License create callback handler. */
+	function createLicense() {
+
+		$response = 1;
 		return $response;
 
 	}
