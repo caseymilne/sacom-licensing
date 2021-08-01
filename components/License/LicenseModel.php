@@ -267,6 +267,28 @@ class LicenseModel extends \SaberCommerce\Model {
 		$f->tableDisplay = 0;
 		$fields[] = $f;
 
+		$f = new \SaberCommerce\Field;
+		$f->type = 'select';
+		$f->key = 'product';
+
+		$pm = new \SaberCommerce\Component\Product\ProductModel();
+		$products = $pm->fetchAll();
+		
+		$f->choices = [];
+		foreach( $products as $product ) {
+
+			$choice = new \stdClass;
+			$choice->label = $product->title;
+			$choice->value = $product->productId;
+			$f->choices[] = $choice;
+
+		}
+
+		$f->propertyKey = 'product';
+		$f->label = 'Product';
+		$f->tableDisplay = 1;
+		$fields[] = $f;
+
 		return $fields;
 
 	}

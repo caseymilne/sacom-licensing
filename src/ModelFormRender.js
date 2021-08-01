@@ -30,7 +30,7 @@ export default function App( props ) {
 
 			if( field.type === 'select' ) {
 
-				const choices = [];
+				let choices = [];
 
 				if( Array.isArray( field.choices ) ) {
 
